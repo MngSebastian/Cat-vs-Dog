@@ -36,6 +36,7 @@ class Player {
     if (this.y + this.height < obj.y || obj.y + this.height < this.y) {
       return false;
     }
+
     return true;
   }
 }
