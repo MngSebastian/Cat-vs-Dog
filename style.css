@@ -1,0 +1,19 @@
+body {
+  background-color: black;
+  /* display: flex; */
+}
+
+.catW {
+  /* visibility: hidden; */
+  /* display: flex; */
+  /* justify-content: center; */
+  border: 1px solid red;
+  height: 550px;
+  width: 400px;
+  z-index: 999;
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
