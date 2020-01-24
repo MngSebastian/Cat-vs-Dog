@@ -36,7 +36,7 @@ function preload() {
   dogWin = loadImage("assets/background/dog-wins.gif");
   this.catSound = loadSound("assets/coins/catt.mp3");
   this.dogSound = loadSound("assets/coins/dogg.mp3");
-  this.bushSound = loadSound("/assets/background/bush-sound.mp3");
+  this.bushSound = loadSound("assets/background/bush-sound.mp3");
 }
 
 function setup() {
