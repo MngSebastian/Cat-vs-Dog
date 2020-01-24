@@ -1,6 +1,6 @@
 let scoreCat = 0;
 let scoreDog = 0;
-let timer = 200;
+let timer = 30;
 let lake;
 let bush;
 let catWin;
@@ -21,7 +21,7 @@ class Game {
   reset() {
     this.scoreCat = 0;
     this.scoreDog = 0;
-    this.timer = 20;
+    this.timer = 25;
   }
 }
 
@@ -30,12 +30,13 @@ const game = new Game();
 function preload() {
   player1.image = loadImage("assets/player/cat/cat-walk/cat-walk.gif");
   player2.image = loadImage("assets/player/dog/dog1.gif");
-  // lake = loadImage("assets/background/lake.png");
+  lake = loadImage("assets/background/lake.png");
   bush = loadImage("assets/background/bush.png");
   catWin = loadImage("assets/background/cat-wins.gif");
   dogWin = loadImage("assets/background/dog-wins.gif");
   this.catSound = loadSound("assets/coins/catt.mp3");
   this.dogSound = loadSound("assets/coins/dogg.mp3");
+  this.bushSound = loadSound("/assets/background/bush-sound.mp3");
 }
 
 function setup() {
@@ -48,7 +49,7 @@ function draw() {
   background(bg);
   //SCORE
   textSize(32); // size
-  fill(255, 255, 255); //color ${}
+  fill(255, 255, 255); //color
   text(`Score-Dog: ${scoreDog.toFixed(2)}`, width - width / 1.1, 30); //
 
   textSize(32);
@@ -58,6 +59,7 @@ function draw() {
   textSize(32);
   fill(255, 255, 255);
   text(`Score-Cat: ${scoreCat.toFixed(2)}`, width - width / 2.9, 30);
+
   if (catGif) {
     image(catWin, width - width / 1.2, 130, 610, 510);
     textSize(32);
@@ -81,7 +83,7 @@ function draw() {
   // console.log({ timer });
   image(player1.image, player1.x, player1.y, player1.width, player1.height);
   image(player2.image, player2.x, player2.y, player2.width, player2.height);
-  // image(lake, width - width / 4, height - 220, 250, 250);
+  image(lake, width - width / 4, height - 220, 250, 250);
   image(bush, width - width / 1, 250, 210, 210);
   image(bush, width - width / 2, 520, 210, 210);
   image(bush, width - width / 3, 50, 210, 210);
@@ -90,7 +92,7 @@ function draw() {
     if (player1.collides(player2)) {
       scoreDog += 0.04;
       //cat sound
-      if (frameCount % 180 == 0) {
+      if (frameCount % 120 == 0) {
         this.catSound.play();
       }
       // console.log(scoreDog.toFixed(2));
@@ -103,7 +105,28 @@ function draw() {
 
       console.log(scoreCat.toFixed(2));
     }
+    // TRY TO HAVE SOUND WHENEVER THE PLAYER HITS THE BUSH
+    // if (player1.collides(bush)) {
+    //   if (frameCount % 60 == 0) {
+    //     this.bushSound.play();
+
+    //   }
+    // }
   }
+  //TRY TO HAVE GHE PLAYER LOE WHEN HE TOUCHES THE LAKE
+  // if (player1.collides(lake)) {
+  //   image(dogWin, width - width / 1.2, 130, 610, 510);
+  //   text(
+  //     `Game-Over: The dog wins because the cat fell in the lake`,
+  //     width - width / 1.45,
+  //     60
+  //   );
+
+  //   Size(32);
+  //   fill(255, 255, 255);
+  //   text(`Refresh the page to play again.:)`, width - width / 1.4, 95);
+  //   // return;
+  // }
 
   if (timer < 1) {
     this.gameOver = true;
@@ -166,7 +189,7 @@ function keyPressed() {
       player1.moveDown();
     } else if (keyCode === 37 && player1.x >= 25) {
       player1.moveLeft();
-    } else if (keyCode === 39 && player1.x - 25 <= 700) {
+    } else if (keyCode === 39 && player1.x - 25 <= 890) {
       player1.moveRight();
     }
 
@@ -177,7 +200,7 @@ function keyPressed() {
       player2.moveDown();
     } else if (keyCode === 65 && player2.x >= 25) {
       player2.moveLeft();
-    } else if (keyCode === 68 && player2.x - 25 <= 700) {
+    } else if (keyCode === 68 && player2.x - 25 <= 900) {
       player2.moveRight();
     }
   } else if (keyCode === 32) {
